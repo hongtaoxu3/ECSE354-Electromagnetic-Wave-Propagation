@@ -1,0 +1,14 @@
+f = 10.^[3:0.05:log10(300e9)];
+eps_norm_H20 = purewatereps(f);
+%semilogx(f,real(eps_norm_H20),f,-imag(eps_norm_H20));
+semilogx(f, -imag(eps_norm_H20)./real(eps_norm_H20));
+eps0 = 8.85418782*10^(-12);
+mu0 = 4*pi*10^(-7);
+gamma = 1i*2*pi*f.*sqrt(eps_norm_H20*eps0*mu0);
+alpha = real(gamma);
+beta = imag(gamma);
+AperL = 8.69*alpha;
+loglog(f,AperL);
+lambda0 = 3e8./f;
+lambda = 2*pi./beta;
+semilogx(f, lambda./lambda0);
